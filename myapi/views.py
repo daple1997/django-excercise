@@ -7,6 +7,7 @@ from rest_framework import status
 from .models import Item
 from .serializers import ItemSerializer
 from django.shortcuts import render
+from django.http import HttpResponse
 
 
 class ItemList(APIView):
@@ -23,4 +24,4 @@ class ItemList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def index(request):
-        return render(request, 'frontend/build/index.html')
+        return HttpResponse("Hello, this is the index page of the API!")
