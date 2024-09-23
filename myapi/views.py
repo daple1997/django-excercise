@@ -9,6 +9,8 @@ from .serializers import ItemSerializer
 from django.shortcuts import render
 from django.http import HttpResponse
 
+def index(request):
+    return HttpResponse("Hello, this is the index page of the API!")
 
 class ItemList(APIView):
     def get(self, request):
@@ -23,5 +25,4 @@ class ItemList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def index(request):
-        return HttpResponse("Hello, this is the index page of the API!")
+    
