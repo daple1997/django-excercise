@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'myapi',
     'webpack_loader',
-     'django_excercise',
+    'django_excercise',
 ]
 
 MIDDLEWARE = [
