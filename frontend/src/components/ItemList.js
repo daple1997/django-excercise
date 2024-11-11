@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Checkbox } from "antd";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -35,11 +36,12 @@ const ItemList = () => {
   return (
     <div>
       <h1>Items List</h1>
-      <ul>
-        {items.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
+      {items.map((item) => (
+        <div key={item.id} style={{ display: "flex", alignItems: "center" }}>
+          <Checkbox />
+          <span style={{ marginLeft: "8px" }}>{item.name}</span>
+        </div>
+      ))}
     </div>
   );
 };
