@@ -5,6 +5,11 @@ const ItemList = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [checkedList, setCheckedList] = useState([]);
+
+  const handleChange = (checkedValues) => {
+    setCheckedList(checkedValues);
+  };
 
   useEffect(() => {
     // Fetch items from the API
@@ -36,12 +41,11 @@ const ItemList = () => {
   return (
     <div>
       <h1>Items List</h1>
-      {items.map((item) => (
-        <div key={item.id} style={{ display: "flex", alignItems: "center" }}>
-          <Checkbox />
-          <span style={{ marginLeft: "8px" }}>{item.name}</span>
-        </div>
-      ))}
+      <Checkbox.Group
+        options={items.map((item) => ({ label: item.name, value: item.id }))}
+        value={checkedList}
+        onChange={handleChange}
+      />
     </div>
   );
 };
