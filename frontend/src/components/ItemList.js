@@ -46,6 +46,12 @@ const ItemList = () => {
         value={checkedList}
         onChange={handleChange}
       />
+      <br />
+      <Checkbox.Group
+        options={items.map((item) => ({ label: item.name, value: item.id }))}
+        disabled
+        defaultValue={["Apple"]}
+      />
     </div>
   );
 };
