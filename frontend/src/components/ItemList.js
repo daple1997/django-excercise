@@ -39,7 +39,12 @@ const ItemList = () => {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        width: "50%",
+        margin: "0 auto",
+      }}
+    >
       <h1>Items List</h1>
       <Checkbox.Group
         options={items.map((item) => ({ label: item.name, value: item.id }))}
