@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox } from "antd";
+import Sequence from "./Sequence";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -7,12 +8,16 @@ const ItemList = () => {
   const [error, setError] = useState(null);
   const [checkedList, setCheckedList] = useState([]);
 
+  const element = {
+    padding: "20px",
+    margin: "10px",
+    backgroundColor: "#F0F8FF",
+  };
   const handleChange = (checkedValues) => {
     setCheckedList(checkedValues);
   };
 
   useEffect(() => {
-    // Fetch items from the API
     fetch("http://localhost:8000/api/items/")
       .then((response) => {
         if (!response.ok) {
@@ -46,17 +51,23 @@ const ItemList = () => {
       }}
     >
       <h1>Items List</h1>
-      <Checkbox.Group
-        options={items.map((item) => ({ label: item.name, value: item.id }))}
-        value={checkedList}
-        onChange={handleChange}
-      />
-      <br />
-      <Checkbox.Group
-        options={items.map((item) => ({ label: item.name, value: item.id }))}
-        disabled
-        defaultValue={["Apple"]}
-      />
+      <div style={element}>
+        <Checkbox.Group
+          options={items.map((item) => ({ label: item.name, value: item.id }))}
+          value={checkedList}
+          onChange={handleChange}
+        />
+      </div>
+      <div style={element}>
+        <Checkbox.Group
+          options={items.map((item) => ({ label: item.name, value: item.id }))}
+          disabled
+          defaultValue={["Apple"]}
+        />
+      </div>
+      <div style={element}>
+        <Sequence />
+      </div>
     </div>
   );
 };
