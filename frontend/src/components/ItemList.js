@@ -62,7 +62,6 @@ const ItemList = () => {
         <Checkbox.Group
           options={items.map((item) => ({ label: item.name, value: item.id }))}
           disabled
-          defaultValue={["Apple"]}
         />
       </div>
       <div style={element}>

@@ -1,5 +1,6 @@
 import React from "react";
 import ItemList from "./components/ItemList";
+import Sequence from "./components/Sequence";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <h1>Welcome to the Item Viewer</h1>
       </header>
       <ItemList />
+      <Sequence />
     </div>
   );
 }
