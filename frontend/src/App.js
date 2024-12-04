@@ -1,6 +1,6 @@
 import React from "react";
 import ItemList from "./components/ItemList";
-import Sequence from "./components/Sequence";
+import AddItem from "./components/AddItem";
 
 function App() {
   return (
@@ -12,10 +12,10 @@ function App() {
           margin: "0 auto",
         }}
       >
-        <h1>Welcome to the Item Viewer</h1>
+        <h1>Welcome to your inventory</h1>
       </header>
       <ItemList />
-      <Sequence />
+      <AddItem />
     </div>
   );
 }

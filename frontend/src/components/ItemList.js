@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox } from "antd";
-import Sequence from "./Sequence";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -63,9 +62,6 @@ const ItemList = () => {
           options={items.map((item) => ({ label: item.name, value: item.id }))}
           disabled
         />
-      </div>
-      <div style={element}>
-        <Sequence />
       </div>
     </div>
   );
