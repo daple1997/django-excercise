@@ -57,12 +57,6 @@ const ItemList = () => {
           onChange={handleChange}
         />
       </div>
-      <div style={element}>
-        <Checkbox.Group
-          options={items.map((item) => ({ label: item.name, value: item.id }))}
-          disabled
-        />
-      </div>
     </div>
   );
 };
