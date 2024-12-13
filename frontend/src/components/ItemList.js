@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Checkbox } from "antd";
+import { Checkbox, Button, Flex } from "antd";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -51,11 +51,25 @@ const ItemList = () => {
     >
       <h1>Items List</h1>
       <div style={element}>
-        <Checkbox.Group
-          options={items.map((item) => ({ label: item.name, value: item.id }))}
-          value={checkedList}
-          onChange={handleChange}
-        />
+        <Checkbox.Group value={checkedList} onChange={handleChange}>
+          {items.map((item) => (
+            <div key={item.id} style={{ marginBottom: "10px" }}>
+              <Checkbox value={item.id}>
+                <strong>{item.name}</strong>
+              </Checkbox>
+              <div
+                style={{ marginLeft: "25px", fontSize: "0.9em", color: "#666" }}
+              >
+                {item.description}
+              </div>
+            </div>
+          ))}
+        </Checkbox.Group>
+        <Flex vertical gap="small" style={{ width: "100%" }}>
+          <Button type="primary" block>
+            Delete
+          </Button>
+        </Flex>
       </div>
     </div>
   );
