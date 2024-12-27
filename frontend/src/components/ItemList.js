@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Checkbox, Button, Flex } from "antd";
 
-const ItemList = () => {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const ItemList = ({ items }) => {
   const [checkedList, setCheckedList] = useState([]);
 
   const element = {
@@ -15,32 +12,6 @@ const ItemList = () => {
   const handleChange = (checkedValues) => {
     setCheckedList(checkedValues);
   };
-
-  useEffect(() => {
-    fetch("http://localhost:8000/api/items/")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setItems(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
 
   return (
     <div

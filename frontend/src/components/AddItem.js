@@ -14,6 +14,7 @@ const AddItemForm = () => {
       );
       message.success("Item added successfully!");
       console.log("Response data:", response.data);
+      window.location.reload();
     } catch (error) {
       message.error("Failed to add item. Please try again.");
       console.error("Error:", error);
@@ -33,7 +34,6 @@ const AddItemForm = () => {
     >
       <h2>Add New Item</h2>
       <Form layout="vertical" onFinish={onFinish}>
-        {/* Item Name */}
         <Form.Item
           name="name"
           label="Name"
