@@ -38,6 +38,8 @@ const Menu = () => {
       </header>
       {loading ? (
         <div>Loading...</div>
+      ) : items.length < 1 ? (
+        <div>No items </div>
       ) : error ? (
         <div>Error: {error.message}</div>
       ) : (

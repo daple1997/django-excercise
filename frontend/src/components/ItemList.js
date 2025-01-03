@@ -13,6 +13,20 @@ const ItemList = ({ items }) => {
     setCheckedList(checkedValues);
   };
 
+  const handleDelete = async () => {
+    items.filter((item) => !checkedList.includes(item.id));
+    try {
+      await Promise.all(
+        checkedList.map((id) =>
+          fetch(`http://localhost:8000/api/items/${id}/`, { method: "DELETE" })
+        )
+      );
+      setCheckedList([]);
+    } catch (error) {
+      console.error("Error deleting items:", error);
+    }
+  };
+
   return (
     <div
       style={{
@@ -37,7 +51,7 @@ const ItemList = ({ items }) => {
           ))}
         </Checkbox.Group>
         <Flex vertical gap="small" style={{ width: "100%" }}>
-          <Button type="primary" block>
+          <Button type="primary" block onClick={() => handleDelete()}>
             Delete
           </Button>
         </Flex>
