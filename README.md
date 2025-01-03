@@ -4,7 +4,11 @@ To use this app
    python manage.py migrate
 2. run the server:
    python manage.py runserver
-3. Test the API:
-   curl -X POST http://127.0.0.1:8000/api/items/ -d '{"name": "Item 1", "description": "This is the first item."}' -H "Content-Type: application/json"
-   //or PowerShell
-   Invoke-RestMethod -Uri http://127.0.0.1:8000/api/items/ -Method POST -Body '{"name": "Item 1", "description": "This is the first item."}' -ContentType 'application/json'
+3. cd frontend
+   npm start
+
+Here you will be able to:
+1. Add items using the form at the bottom. They will have a name and a title.
+2. delete multiple items with the checkbox and delete button
+
+
