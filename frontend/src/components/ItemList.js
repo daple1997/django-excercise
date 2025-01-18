@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { Checkbox, Button, Row, Col } from "antd";
+import React, { useState, useEffect } from "react";
+import { Checkbox, Button, Row, Col, Form, Input } from "antd";
 import AddItem from "./AddItem";
 
 const ItemList = ({ items }) => {
   const [checkedList, setCheckedList] = useState([]);
+  const [lastChecked, setLastChecked] = useState();
   const [itemList, setItemList] = useState(items || []);
+  const [form] = Form.useForm();
 
   const element = {
     padding: "20px",
@@ -13,8 +15,28 @@ const ItemList = ({ items }) => {
   };
 
   const handleChange = (checkedValues) => {
+    const lastId = checkedValues[checkedValues.length - 1];
+    const lastItem = items.find((item) => item.id === lastId);
+    setLastChecked(lastItem);
     setCheckedList(checkedValues);
+
+    if (lastItem) {
+      form.setFieldsValue({
+        name: lastItem.name,
+        description: lastItem.description,
+      });
+    }
   };
+  //checking if last checked works as intended
+  useEffect(() => {
+    console.log("Updated lastChecked:", lastChecked);
+    if (lastChecked) {
+      console.log("name " + lastChecked.name);
+      console.log("description " + lastChecked.description);
+    }
+    console.log("list:" + checkedList);
+    console.log("items " + JSON.stringify(items));
+  }, [lastChecked, checkedList, items]);
 
   const handleDelete = async () => {
     try {
@@ -83,6 +105,27 @@ const ItemList = ({ items }) => {
               >
                 Delete Selected
               </Button>
+              <Form
+                name="basic"
+                layout="vertical"
+                style={{ width: "300px", margin: "20px auto" }}
+                onFinish={(values) => console.log("Submitted values:", values)}
+                form={form}
+              >
+                <Form.Item label="name" name="name">
+                  <Input />
+                </Form.Item>
+
+                <Form.Item label="description" name="description">
+                  <Input />
+                </Form.Item>
+
+                <Form.Item>
+                  <Button type="primary" htmlType="submit" block>
+                    Submit
+                  </Button>
+                </Form.Item>
+              </Form>
             </div>
             <AddItem />
           </>
