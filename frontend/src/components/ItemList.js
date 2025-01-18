@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Checkbox, Button, Row, Col } from "antd";
+import AddItem from "./AddItem";
 
 const ItemList = ({ items }) => {
   const [checkedList, setCheckedList] = useState([]);
@@ -69,11 +70,21 @@ const ItemList = ({ items }) => {
                 </div>
               ))}
             </Checkbox.Group>
-            <div style={{ marginTop: "20px", width: "100%" }}>
-              <Button type="primary" block onClick={handleDelete}>
-                Delete
+            <div style={{ marginTop: "20px", width: "30%" }}>
+              <Button
+                type="primary"
+                style={{
+                  backgroundColor: "red",
+                  borderColor: "red",
+                  color: "white",
+                }}
+                block
+                onClick={handleDelete}
+              >
+                Delete Selected
               </Button>
             </div>
+            <AddItem />
           </>
         )}
       </div>

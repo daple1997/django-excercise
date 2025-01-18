@@ -52,7 +52,6 @@ const Menu = () => {
       ) : (
         <ItemList items={items} />
       )}
-      <AddItem />
     </div>
   );
 };
