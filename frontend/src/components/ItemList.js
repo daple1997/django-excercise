@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Checkbox, Button } from "antd";
+import { Checkbox, Button, Row, Col } from "antd";
 
 const ItemList = ({ items }) => {
   const [checkedList, setCheckedList] = useState([]);
@@ -39,7 +39,11 @@ const ItemList = ({ items }) => {
         margin: "0 auto",
       }}
     >
-      <h1>Items List</h1>
+      <Row justify="center">
+        <Col>
+          <h1>Item List</h1>
+        </Col>
+      </Row>
       <div style={element}>
         {itemList.length === 0 ? (
           <div style={{ textAlign: "center", color: "#999" }}>

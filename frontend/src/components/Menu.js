@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ItemList from "./ItemList";
 import AddItem from "./AddItem";
+import { Row, Col } from "antd";
 
 const Menu = () => {
   const [items, setItems] = useState([]);
@@ -34,10 +35,18 @@ const Menu = () => {
           margin: "0 auto",
         }}
       >
-        <h1>Welcome to your inventory</h1>
+        <Row justify="center">
+          <Col>
+            <h1>Welcome to your inventory</h1>
+          </Col>
+        </Row>
       </header>
       {loading ? (
-        <div>Loading...</div>
+        <Row justify="center">
+          <Col>
+            <p>Loading..</p>
+          </Col>
+        </Row>
       ) : error ? (
         <div>Error: {error.message}</div>
       ) : (
