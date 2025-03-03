@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Checkbox, Button, Row, Col, Form, Input } from "antd";
+import axios from "axios";
 import AddItem from "./AddItem";
 
 const ItemList = ({ items }) => {
@@ -53,6 +54,16 @@ const ItemList = ({ items }) => {
     } catch (error) {
       console.error("Error deleting items:", error);
     }
+  };
+
+  const handleEdit = async (values) => {
+    console.log(`editted values: ${JSON.stringify(values)}`);
+    console.log(`lastChecked ${JSON.stringify(lastChecked)}`);
+    const id = lastChecked.id;
+
+    setItemList((prevItems) =>
+      prevItems.map((item) => (item.id === id ? { ...item, ...values } : item))
+    );
   };
 
   return (
@@ -109,7 +120,7 @@ const ItemList = ({ items }) => {
                 name="basic"
                 layout="vertical"
                 style={{ width: "300px", margin: "20px auto" }}
-                onFinish={(values) => console.log("Submitted values:", values)}
+                onFinish={(values) => handleEdit(values)}
                 form={form}
               >
                 <Form.Item label="name" name="name">
@@ -122,7 +133,7 @@ const ItemList = ({ items }) => {
 
                 <Form.Item>
                   <Button type="primary" htmlType="submit" block>
-                    Submit
+                    Edit
                   </Button>
                 </Form.Item>
               </Form>
