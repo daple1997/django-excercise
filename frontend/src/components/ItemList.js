@@ -61,6 +61,11 @@ const ItemList = ({ items }) => {
     console.log(`lastChecked ${JSON.stringify(lastChecked)}`);
     const id = lastChecked.id;
 
+    axios
+      .put(`http://localhost:8000/api/items/${id}/`, values)
+      .then((response) => console.log("Item updated:", response.data))
+      .catch((error) => console.error("Error updating item:", error));
+
     setItemList((prevItems) =>
       prevItems.map((item) => (item.id === id ? { ...item, ...values } : item))
     );
