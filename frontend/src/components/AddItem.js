@@ -26,8 +26,8 @@ const AddItemForm = () => {
   return (
     <div
       style={{
-        width: "50%",
-        margin: "0 auto",
+        width: "600px",
+        margin: "20px auto",
         padding: "20px",
         backgroundColor: "#f9f9f9",
       }}

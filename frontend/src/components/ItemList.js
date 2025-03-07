@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Checkbox, Button, Row, Col, Form, Input } from "antd";
 import axios from "axios";
-import AddItem from "./AddItem";
 
 const ItemList = ({ items }) => {
   const [checkedList, setCheckedList] = useState([]);
@@ -10,8 +9,8 @@ const ItemList = ({ items }) => {
   const [form] = Form.useForm();
 
   const element = {
-    padding: "20px",
-    margin: "10px",
+    width: "600px",
+    margin: "20px auto",
     backgroundColor: "#F0F8FF",
   };
 
@@ -72,12 +71,7 @@ const ItemList = ({ items }) => {
   };
 
   return (
-    <div
-      style={{
-        width: "50%",
-        margin: "0 auto",
-      }}
-    >
+    <div>
       <Row justify="center">
         <Col>
           <h1>Item List</h1>
@@ -90,7 +84,11 @@ const ItemList = ({ items }) => {
           </div>
         ) : (
           <>
-            <Checkbox.Group value={checkedList} onChange={handleChange}>
+            <Checkbox.Group
+              value={checkedList}
+              onChange={handleChange}
+              style={{ padding: "20px" }}
+            >
               {itemList.map((item) => (
                 <div key={item.id} style={{ marginBottom: "10px" }}>
                   <Checkbox value={item.id}>
@@ -108,7 +106,7 @@ const ItemList = ({ items }) => {
                 </div>
               ))}
             </Checkbox.Group>
-            <div style={{ marginTop: "20px", width: "30%" }}>
+            <div style={{ padding: "20px", width: "30%" }}>
               <Button
                 type="primary"
                 style={{
@@ -128,12 +126,27 @@ const ItemList = ({ items }) => {
                 onFinish={(values) => handleEdit(values)}
                 form={form}
               >
-                <Form.Item label="name" name="name">
-                  <Input />
+                <Form.Item
+                  label="Name"
+                  name="name"
+                  rules={[
+                    { required: true, message: "Please enter the item name!" },
+                  ]}
+                >
+                  <Input placeholder="Enter item name" />
                 </Form.Item>
 
-                <Form.Item label="description" name="description">
-                  <Input />
+                <Form.Item
+                  label="Description"
+                  name="description"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter the item description!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Enter item description" />
                 </Form.Item>
 
                 <Form.Item>
@@ -143,7 +156,6 @@ const ItemList = ({ items }) => {
                 </Form.Item>
               </Form>
             </div>
-            <AddItem />
           </>
         )}
       </div>

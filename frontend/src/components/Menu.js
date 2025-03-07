@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ItemList from "./ItemList";
-import AddItem from "./AddItem";
 import { Row, Col } from "antd";
+import AddItem from "./AddItem";
 
 const Menu = () => {
   const [items, setItems] = useState([]);
@@ -50,7 +50,10 @@ const Menu = () => {
       ) : error ? (
         <div>Error: {error.message}</div>
       ) : (
-        <ItemList items={items} />
+        <>
+          <ItemList items={items} />
+          <AddItem />
+        </>
       )}
     </div>
   );
