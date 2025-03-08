@@ -42,7 +42,7 @@ const ItemList = ({ items }) => {
     try {
       await Promise.all(
         checkedList.map((id) =>
-          fetch(`http://localhost:8000/api/items/${id}/`, { method: "DELETE" })
+          axios.delete(`http://localhost:8000/api/items/${id}/`)
         )
       );
       const updatedItems = itemList.filter(
