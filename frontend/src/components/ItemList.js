@@ -27,7 +27,7 @@ const ItemList = ({ items }) => {
       });
     }
   };
-  //checking if last checked works as intended
+
   useEffect(() => {
     console.log("Updated lastChecked:", lastChecked);
     if (lastChecked) {
