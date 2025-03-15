@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ItemList from "./ItemList";
 import { Row, Col } from "antd";
-import AddItem from "./AddItem";
 
 const Menu = () => {
   const [items, setItems] = useState([]);
@@ -52,7 +51,6 @@ const Menu = () => {
       ) : (
         <>
           <ItemList items={items} />
-          <AddItem />
         </>
       )}
     </div>

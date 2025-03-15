@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Checkbox, Button, Row, Col, Form, Input } from "antd";
+import { Checkbox, Button, Row, Col, Form, Input, message } from "antd";
 import axios from "axios";
 
 const ItemList = ({ items }) => {
@@ -58,16 +58,32 @@ const ItemList = ({ items }) => {
   const handleEdit = async (values) => {
     console.log(`editted values: ${JSON.stringify(values)}`);
     console.log(`lastChecked ${JSON.stringify(lastChecked)}`);
-    const id = lastChecked.id;
+    if (lastChecked) {
+      const id = lastChecked.id;
+      axios
+        .put(`http://localhost:8000/api/items/${id}/`, values)
+        .then((response) => console.log("Item updated:", response.data))
+        .catch((error) => console.error("Error updating item:", error));
 
-    axios
-      .put(`http://localhost:8000/api/items/${id}/`, values)
-      .then((response) => console.log("Item updated:", response.data))
-      .catch((error) => console.error("Error updating item:", error));
-
-    setItemList((prevItems) =>
-      prevItems.map((item) => (item.id === id ? { ...item, ...values } : item))
-    );
+      setItemList((prevItems) =>
+        prevItems.map((item) =>
+          item.id === id ? { ...item, ...values } : item
+        )
+      );
+    } else {
+      try {
+        const response = await axios.post(
+          "http://127.0.0.1:8000/api/items/",
+          values
+        );
+        message.success("Item added successfully!");
+        console.log("Response data:", response.data);
+        window.location.reload();
+      } catch (error) {
+        message.error("Failed to add item. Please try again.");
+        console.error("Error:", error);
+      }
+    }
   };
 
   return (
@@ -151,7 +167,7 @@ const ItemList = ({ items }) => {
 
                 <Form.Item>
                   <Button type="primary" htmlType="submit" block>
-                    Edit
+                    {lastChecked ? <>Edit</> : <>Add</>}
                   </Button>
                 </Form.Item>
               </Form>
