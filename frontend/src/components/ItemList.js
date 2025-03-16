@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Checkbox, Button, Row, Col, Form, Input, message } from "antd";
 import axios from "axios";
 
@@ -28,16 +28,6 @@ const ItemList = ({ items }) => {
     }
   };
 
-  useEffect(() => {
-    console.log("Updated lastChecked:", lastChecked);
-    if (lastChecked) {
-      console.log("name " + lastChecked.name);
-      console.log("description " + lastChecked.description);
-    }
-    console.log("list:" + checkedList);
-    console.log("items " + JSON.stringify(items));
-  }, [lastChecked, checkedList, items]);
-
   const handleDelete = async () => {
     try {
       await Promise.all(
@@ -56,8 +46,6 @@ const ItemList = ({ items }) => {
   };
 
   const handleEdit = async (values) => {
-    console.log(`editted values: ${JSON.stringify(values)}`);
-    console.log(`lastChecked ${JSON.stringify(lastChecked)}`);
     if (lastChecked) {
       const id = lastChecked.id;
       axios
