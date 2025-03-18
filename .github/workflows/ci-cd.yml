@@ -24,7 +24,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd backend
+          cd django_excercise
           python -m venv venv
           venv\Scripts\activate
           pip install -r requirements.txt
