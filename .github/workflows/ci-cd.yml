@@ -1,0 +1,103 @@
+name: Django & React CI/CD (Windows)
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  backend:
+    name: Build & Test Django Backend (SQLite)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: |
+          # cd django_excercise
+          python -m venv venv
+          venv\Scripts\activate
+          pip install -r requirements.txt
+
+      - name: Run Migrations
+        run: |
+          cd backend
+          venv\Scripts\activate
+          python manage.py migrate --noinput
+
+      - name: Run Tests
+        run: |
+          cd backend
+          venv\Scripts\activate
+          python manage.py test
+
+  frontend:
+    name: Build & Test React Frontend
+    runs-on: windows-latest
+    needs: backend
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install Dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run Tests
+        run: |
+          cd frontend
+          npm test
+
+      - name: Build React App
+        run: |
+          cd frontend
+          npm run build
+
+  deploy:
+    name: Deploy Backend & Frontend
+    runs-on: windows-latest
+    needs: [backend, frontend]
+
+    steps:
+      - name: Deploy Django Backend
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd C:\vscode-workplace\django_excercise
+            git pull origin main
+            venv\Scripts\activate
+            pip install -r requirements.txt
+            python manage.py migrate --noinput
+            net stop my-django-service && net start my-django-service  # Restart service on Windows
+
+      - name: Deploy React Frontend
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd C:\vscode-workplace\django_excercise
+            git pull origin master
+            npm install
+            npm run build
