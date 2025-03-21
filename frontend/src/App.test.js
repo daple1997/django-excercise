@@ -4,7 +4,7 @@ import App from "./App";
 
 jest.mock("axios");
 
-// Mock matchMedia (fix for Ant Design's grid responsiveness)
+// Fix AntD matchMedia issue
 beforeAll(() => {
   window.matchMedia =
     window.matchMedia ||
@@ -13,8 +13,8 @@ beforeAll(() => {
         matches: false,
         media: "",
         onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
+        addListener: jest.fn(), // deprecated
+        removeListener: jest.fn(), // deprecated
         addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
         dispatchEvent: jest.fn(),
@@ -27,8 +27,8 @@ test("axios mock test", () => {
   expect(axios.get).toBeCalledTimes(0);
 });
 
-test("renders learn react link", () => {
+test("renders welcome message", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const heading = screen.getByText(/welcome to your inventory/i);
+  expect(heading).toBeInTheDocument();
 });
