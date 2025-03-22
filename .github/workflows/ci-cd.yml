@@ -11,7 +11,7 @@ on:
 jobs:
   backend:
     name: Build & Test Django Backend (SQLite)
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
@@ -40,7 +40,7 @@ jobs:
 
   frontend:
     name: Build & Test React Frontend
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: backend
 
     steps:
@@ -69,7 +69,7 @@ jobs:
 
   deploy:
     name: Deploy Backend & Frontend
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: [backend, frontend]
 
     steps:
