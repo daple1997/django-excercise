@@ -34,7 +34,7 @@ jobs:
           python manage.py migrate --noinput
       - name: Run Tests
         run: |
-          venv\Scripts\activate
+          source venv/bin/activate
           python manage.py test
 
   frontend:
@@ -81,7 +81,7 @@ jobs:
           script: |
             cd C:\vscode-workplace\django_excercise
             git pull origin main
-            venv\Scripts\activate
+            source venv/bin/activate
             pip install -r requirements.txt
             python manage.py migrate --noinput
             net stop my-django-service && net start my-django-service  # Restart service on Windows
