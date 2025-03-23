@@ -1,0 +1,19 @@
+# Ignore Python virtual environments
+
+venv/
+
+# Python junk
+
+**pycache**/
+_.py[cod]
+_.log
+
+# Node junk (if you move frontend rules here too)
+
+node_modules/
+build/
+dist/
+
+# Environment variables
+
+.env
