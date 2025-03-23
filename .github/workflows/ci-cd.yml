@@ -1,4 +1,4 @@
-name: Django & React CI/CD (Windows)
+name: Django & React CI/CD
 
 on:
   push:
