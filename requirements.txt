@@ -5,3 +5,4 @@ pip>=23.3
 setuptools>=65.5.1
 python-dotenv
 django-cors-headers
+webpack_loader
