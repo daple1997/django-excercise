@@ -1,6 +1,5 @@
-Django==4.2
-djangorestframework==3.14.0
-gunicorn==21.2.0
-python-dotenv
-django-cors-headers
-django-webpack-loader
+Django>=4.2.20
+djangorestframework>=3.15.2
+gunicorn>=23.0.0
+pip>=23.3
+setuptools>=65.5.1
