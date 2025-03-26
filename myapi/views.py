@@ -1,13 +1,10 @@
-from django.shortcuts import render
-
 # Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Item
 from .serializers import ItemSerializer
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 
 def index(request):
@@ -33,7 +30,7 @@ class ItemDetailView(APIView):
         try:
             return Item.objects.get(pk=pk)
         except Item.DoesNotExist:
-            raise Http404
+            raise Http404("Item with the given ID does not exist.")
 
     def get(self, request, pk):
         item = self.get_object(pk)
