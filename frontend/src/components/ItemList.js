@@ -32,11 +32,11 @@ const ItemList = ({ items }) => {
     try {
       await Promise.all(
         checkedList.map((id) =>
-          axios.delete(`http://localhost:8000/api/items/${id}/`)
-        )
+          axios.delete(`http://localhost:8000/api/items/${id}/`),
+        ),
       );
       const updatedItems = itemList.filter(
-        (item) => !checkedList.includes(item.id)
+        (item) => !checkedList.includes(item.id),
       );
       setItemList(updatedItems);
       setCheckedList([]);
@@ -55,14 +55,14 @@ const ItemList = ({ items }) => {
 
       setItemList((prevItems) =>
         prevItems.map((item) =>
-          item.id === id ? { ...item, ...values } : item
-        )
+          item.id === id ? { ...item, ...values } : item,
+        ),
       );
     } else {
       try {
         const response = await axios.post(
           "http://127.0.0.1:8000/api/items/",
-          values
+          values,
         );
         message.success("Item added successfully!");
         console.log("Response data:", response.data);

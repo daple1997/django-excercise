@@ -1,4 +1,5 @@
 To use this app
+
 1. run migrations:
    python manage.py makemigrations
    python manage.py migrate
