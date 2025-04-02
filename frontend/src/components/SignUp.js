@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { Button, Card, Form, Input, message } from "antd";
 import { Link } from "react-router-dom";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 
-const LoginPage = () => {
+const SignupPage = () => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
     setLoading(true);
-    console.log("Logging in with: ", values);
-    // Future: Send request to Django backend
+    console.log("Signing up with: ", values);
     setTimeout(() => {
       setLoading(false);
-      message.success("Login successful!");
+      message.success("Signup successful!");
     }, 1000);
   };
 
@@ -26,13 +25,25 @@ const LoginPage = () => {
         background: "#f0f2f5",
       }}
     >
-      <Card title="Login" style={{ width: 350 }}>
-        <Form name="login" onFinish={onFinish}>
+      <Card title="Sign Up" style={{ width: 350 }}>
+        <Form name="signup" onFinish={onFinish}>
           <Form.Item
             name="username"
             rules={[{ required: true, message: "Please enter your username!" }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Username" />
+          </Form.Item>
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                required: true,
+                type: "email",
+                message: "Please enter a valid email!",
+              },
+            ]}
+          >
+            <Input prefix={<MailOutlined />} placeholder="Email" />
           </Form.Item>
           <Form.Item
             name="password"
@@ -42,16 +53,16 @@ const LoginPage = () => {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" block loading={loading}>
-              Login
+              Sign Up
             </Button>
           </Form.Item>
         </Form>
         <div style={{ marginTop: 10, textAlign: "center" }}>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
+          Already have an account? <Link to="/login">Login</Link>
         </div>
       </Card>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignupPage;
