@@ -49,6 +49,9 @@ const LoginPage = () => {
         <div style={{ marginTop: 10, textAlign: "center" }}>
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </div>
+        <div style={{ marginTop: 10, textAlign: "center" }}>
+          <a href="/forgotpassword">Forgot password?</a>
+        </div>
       </Card>
     </div>
   );

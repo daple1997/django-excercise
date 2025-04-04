@@ -8,6 +8,7 @@ import {
 import Menu from "./components/Menu";
 import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignUp";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard" element={<Menu />} />
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );
