@@ -9,4 +9,5 @@ jest.mock("react-router-dom", () => ({
   BrowserRouter: "div",
   Route: "div",
   Routes: "div",
+  Navigate: "div",
 }));
