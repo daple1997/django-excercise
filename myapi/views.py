@@ -1,10 +1,15 @@
-# Create your views here.
+# views.py
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
+from django.http import HttpResponse, Http404
 from .models import Item
 from .serializers import ItemSerializer
-from django.http import HttpResponse, Http404
+
+from django.contrib.auth.models import User
+from .serializers import UserSerializer
+
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 def index(request):
@@ -49,3 +54,24 @@ class ItemDetailView(APIView):
         item = self.get_object(pk)
         item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# ✅ UserViewSet
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get_permissions(self):
+        if self.action in ["list", "destroy"]:
+            return [IsAdminUser()]
+        return [IsAuthenticated()]
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_staff:
+            return User.objects.all()
+        return User.objects.filter(id=user.id)
+
+    def perform_create(self, serializer):
+        # Prevent setting admin fields via API
+        serializer.save(is_staff=False, is_superuser=False)
